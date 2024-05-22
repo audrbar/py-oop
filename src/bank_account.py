@@ -4,10 +4,10 @@ class BankAccount:
         self.balance = balance
 
     def deposit(self, amount: int):
-        return self.balance + amount
+        self.balance += amount
 
     def withdraw(self, amount: int):
-        return self.balance - amount
+       self.balance -= amount
 
     def display_balance(self):
         print(f'Tavo balansas: {self.balance}')
