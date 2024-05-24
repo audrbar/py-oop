@@ -6,10 +6,10 @@ class ShoppingCart:
         shop_cart = {}
         one_more = True
         while one_more:
-            shop_item = input('Ivesk preke: ')
-            shop_price = input('Nurodyk kaina: ')
+            shop_item = input('Choose you item: ')
+            shop_price = input('Provide price: ')
             shop_cart[shop_item] = shop_price
-            one_more = bool(input('Dar prekiu (1/0)? '))
+            one_more = bool(input('More items (1/0)? '))
         return shop_cart
 
     def total_price(self):
@@ -22,6 +22,6 @@ class ShoppingCart:
         pass
 
 
-cart_1 = ShoppingCart({'duona': 5})
+cart_1 = ShoppingCart({'bread': 5})
 cart_1.add_item()
 print(cart_1)
