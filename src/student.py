@@ -7,15 +7,17 @@ class Student:
         return self.grade
 
     def set_grade(self, new_grade):
-        if new_grade >= 0 and new_grade < 100:
+        if 0 <= new_grade < 100:
             self.grade = new_grade
         else:
-            print('Ivertinimas netinka')
-    def print_studen_info(self):
-        print(f'Studentas: {self.name}, {self.grade}')
+            print('Ops... Grade must be between 1 and 100.')
+
+    def print_student_info(self):
+        print(f'Student: {self.name}, {self.grade}')
+
 
 stu_1 = Student('Audrius', 60)
-stu_1.print_studen_info()
+stu_1.print_student_info()
 stu_1.set_grade(101)
 stu_1.set_grade(70)
-stu_1.print_studen_info()
+stu_1.print_student_info()

@@ -32,5 +32,6 @@ class PasswordValidator:
             res = True
         return res
 
-psw_1 = PasswordValidator('Lietuva')
-print(f'Ar geras slaptazodis: {psw_1.is_valid()}')
+
+psw_1 = PasswordValidator('Lithuania')
+print(f'Is password valid: {psw_1.is_valid()}')

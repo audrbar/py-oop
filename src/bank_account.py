@@ -7,14 +7,15 @@ class BankAccount:
         self.balance += amount
 
     def withdraw(self, amount: int):
-       self.balance -= amount
+        self.balance -= amount
 
     def display_balance(self):
-        print(f'Tavo balansas: {self.balance}')
+        print(f'Your balance: {self.balance}')
 
-account = BankAccount('audrius',500)
-print(f'{account.owner} saskaita {account.balance}')
+
+account = BankAccount('audrius', 500)
+print(f'{account.owner} account balance {account.balance}')
 account.deposit(5)
-print(account.display_balance())
+account.display_balance()
 account.withdraw(10)
-print(account.display_balance())
+account.display_balance()
