@@ -3,11 +3,11 @@ class Rectangle:
         self.ilgis = ilgis
         self.plotis = plotis
 
-    def get_area(self):
+    def get_area(self) -> int:
         return self.ilgis * self.plotis
 
-    def get_perimeter(self):
-        return 2 * self.ilgis + 2 * self.plotis
+    def get_perimeter(self) -> int:
+        return (self.ilgis + self.plotis) * 2
 
 
 rect_1 = Rectangle(5, 4)

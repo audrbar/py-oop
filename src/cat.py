@@ -1,13 +1,11 @@
 class Cat:
-    total_cats = 0
+    total_cats: int = 0
 
     def __init__(self, name: str, color: str):
         self.name = name
         self.color = color
+        print(f"The {self.color} cat '{self.name}' was created.")
         Cat.total_cats += 1
-
-    def print_amount(self):
-        print(f'Created {self.total_cats} cats.')
 
 
 cat1 = Cat('lola', 'green')

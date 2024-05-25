@@ -8,7 +8,7 @@ class ShoppingCart:
         self.items.append({'name': name, 'price': price, 'amount': amount})
         print(f"The {amount} pieces of '{name}' for {price}$ each where added to the Cart #{self.id}.")
 
-    def total_price(self):
+    def total_price(self) -> float:
         total: float = 0.0
         for item in cart.items:
             total += item['price'] * item['amount']
