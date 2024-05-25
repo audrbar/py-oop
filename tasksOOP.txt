@@ -44,11 +44,6 @@
 	7.3 Pridėkite viešuosius metodus add_item, skirtus elementui pridėti į krepšelį, total_price, skirtus apskaičiuoti bendrą kainą, įskaitant visas nuolaidas, ir checkout, skirtus atspausdinti galutinę kainą pritaikius nuolaidą.
 	7.4 Sukurkite "ShoppingCart" objektą, pridėkite prekių ir išbandykite checkout metodą.
 
-8 užduotis
-	8.1 Apibrėžkite klasę ShoppingCart su atributu items (prekių kainų sąrašas, arba galite naudoti žodyną).
-	8.2 Pridėkite privatų metodą _calculate_discount, kuris taikys 10 % nuolaidą, jei bendra kaina viršija 100 Eur.
-	8.3 Pridėkite viešuosius metodus add_item, skirtus elementui pridėti į krepšelį, total_price, skirtus apskaičiuoti bendrą kainą, įskaitant visas nuolaidas, ir checkout, skirtus atspausdinti galutinę kainą pritaikius nuolaidą.
-	8.4 Sukurkite "ShoppingCart" objektą, pridėkite prekių ir išbandykite checkout metodą.
 
 -------------------------- namu darbai 2024-05-27 ---------------------
 
