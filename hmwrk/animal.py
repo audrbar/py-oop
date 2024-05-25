@@ -4,7 +4,7 @@ class Animal:
         self.species = species
 
     def describe(self):
-        print(f'Your animal: {self.name}, {self.species}.')
+        print(f'Your animal is {self.name}, {self.species}.')
 
 
 animal_1 = Animal('cat', 'mammal')
