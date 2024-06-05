@@ -9,8 +9,14 @@ class Car:
         print(f"The {self.color} car '{self.brand}' '{self.model}' was created.")
         Car.total_cars += 1
 
+    # instance method
     def start_engine(self) -> str:
         return f"The {self.color} car '{self.brand}' '{self.model}' engine ir now running."
+
+    # sting representation
+    def __str__(self) -> str:
+        information = f"The {self.color} car '{self.brand}' '{self.model}' string representation."
+        return information
 
 
 car_1 = Car('audi', 'A4', 'green')
@@ -21,3 +27,4 @@ print(f"All of them have {car_1.wheels} wheels.")
 print(car_1.start_engine())
 print(car_2.start_engine())
 print(car_3.start_engine())
+print(car_1)

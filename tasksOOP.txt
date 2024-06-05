@@ -87,4 +87,73 @@
 	7.3 Pridėkite viešuosius metodus add_item, kad pridėtumėte prekę su nurodytu kiekiu, remove_item, kad pašalintumėte prekę, ir get_total_items, kad grąžintumėte bendrą krepšelio prekių skaičių.
 	7.4 Užtikrinkite, kad metodai add_item ir remove_item atnaujintų krepšelį ir apskaičiuotų bendrą kiekį.
 	7.5 Sukurkite ShoppingCart objektą, pridėkite ir pašalinkite elementus ir gaukite bendrą elementų skaičių.
+
+------------------------ 2024-05-27 --------------------------
+
+1. Sukurkite bazinę klasę Person su atributais name ir age. Apibrėžkite metodą introduce, kuris spausdina pasveikinimą. Sukurkite išvestinę klasę Student, kuri paveldi iš Person ir prideda atributą school_name. Pridėkite metodą print_info(), kur atspausdinkite visą žinomą informaciją apie žmogų.
+
+2. Sukurkite bazinę klasę Vehicle su atributais make ir model ir metodu description(), kuris juos atspausdina. Sukurkite išvestinę klasę Car, kuri priima atributą year ir naudoja super(), kad iškviestų bazinės klasės metodą savo aprašymo metode.
+
+3. Sukurkite bazinę klasę Instrument su metodu play, kuris atspausdina pranešimą kad instrumentas groja. Sukurkite dvi išvestines klases Guitar ir Drum, ir taip pat implementuokite metodą play() ir atspausdina info kuris butent instrumentas groja. Parašykite funkciją play_instrument, kuri priima objektą Instrument ir iškviečia jo metodą play.
+
+4. Sukurkite paprastą bibliotekos sistemą su knygomis, nariais ir skolintomis knygomis.
+	4.1 Sukurkite bazinę klasę Book su atributais title, author ir isbn (knygis id).
+	4.2 Sukurkite bazinę klasę Member su atributais name ir member_id.
+	4.3 Sukurkite išvestinę klasę BorrowedBook, kuri paveldi iš Book ir prideda atributus borrower_name (member vardas kuris pasiėmė knygą) ir due_date (iki kada pasiėmė).
+	4.4. Sukurkite Member ir imituokite bibliotekos veiklą.
+	
+5. Parašykite programą, kuri imituotų mokyklos systemą. Implementuokite klases: Person, Teacher, Student, Cource. Programoje turi būti galimybė priskirti studentą prie kurso, atspausdinti informaciją apie kursą: kas dėsto, kiek valandų, koks pažymys.
+
+6. Sukurkite el. parduotuves sistemą. Joje turi būti bent dvieju tipu klientai: preminium (premium gauna nuolaidą) ir paprastas. Be to parduotivėje turi būti bent dvieju kategorijų produktai. Suteikite klientui galimybę suformuoti užsakymą.
+
+7. Savarankiškas mini projektas. Sugalvokite ir implementuokyte savo sistemą. Joje būtinai turi būti naudojamos klasės, paveldėjimai. Minimalus klasiu skaičius - 5. Klasės turi tarpusavyje saveikauti. 
+
+
+5 klases, 1 tevine, po 2-3 metodus
+get_assigned_tasks
+
+ 
+Dariusz Dravnel to Everyone (27 May 2024, 21:52)
+class Person:
+    def __init__(self, vardas: str, amzius: int):
+        self.vardas = vardas
+        self.amzius = amzius
+
+    def __str__(self):
+        return f"{self.vardas} Amzius: {self.amzius}"
+
+
+class Teacher(Person):
+    def __init__(self, vardas: str, amzius: int, paskaita: str):
+        super().__init__(vardas, amzius)
+        self.paskaita = paskaita
+
+    def __str__(self):
+        return f"{self.vardas} Amzius: {self.amzius}\n Destomas dalykas: {self.paskaita}"
+class Student(Person):
+    def __init__(self, vardas: str, amzius: int, pazymis: int):
+        super().__init__(vardas, amzius)
+        self.pazymis = pazymis
+
+    def __str__(self):
+        return f"{self.vardas} Amzius: {self.amzius}\n Pazymis: {self.pazymis}"
+
+
+class Course:
+    def __init__(self, name: str, destytojas: str, valandu_kiekis: int):
+        self.name = name
+        self.destytojas = destytojas
+        self.valandu_kiekis = valandu_kiekis
+        self.students = []
+
+    def add_students(self, student):
+        self.students.append(student)
+
+    def print_info(self):
+        print(f"Kursas: {self.name}")
+        print(f"Desto: {self.destytojas}")
+        print(f"Valandos: {self.valandu_kiekis}")
+        print("Mokinantys studentai:")
+        for student in self.students:
+            print(f"- {student}")
 	
