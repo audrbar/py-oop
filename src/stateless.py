@@ -255,3 +255,6 @@ order.checkout()
 
 # 8. Sukurkite klasę DataTransformer su statiniais metodais, kad atliktumėte duomenų transformavimo operacijas:
 # skaičių sąrašo normalizavimą, eilučių kodavimą/dekodavimą ir duomenų filtravimą pagal kriterijus.
+
+# 9. Sukurkite klasę „ReservationSystem“, kuri tvarko paslaugos (pvz., viešbučio kambarių, restorano stalų) rezervacijas.
+# Įdiekite rezervacijų kūrimo, rezervacijų atšaukimo, prieinamumo tikrinimo ir visų rezervacijų peržiūros metodus.
