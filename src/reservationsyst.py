@@ -6,7 +6,7 @@ class ReservationSystem:
     def __init__(self, name: str):
         self.name = name
         self.bkg_items = []
-        print(f"\nSuccess: The hotel {self.name} was established.")
+        print(f"\nSuccess: A hotel {self.name} was established.")
 
     def create_booking_item(self, id_: str, kind: str, *is_booked: bool):
         self.bkg_items.append({'id': id_, 'kind': kind, 'is_booked': False})
@@ -17,7 +17,7 @@ class ReservationSystem:
         for item in self.bkg_items:
             if not item['is_booked']:
                 free_items.append(item)
-        print('\nJust choose one of the our available offers by id:')
+        print('\nJust choose one of the available offers today by id:')
         for item in free_items:
             print(f"- {item['kind']} #{item['id']}, is booked now: {item['is_booked']}.")
         usr_choice = input('Your choice (#): ')
@@ -30,7 +30,7 @@ class ReservationSystem:
         for item in self.bkg_items:
             if item['is_booked']:
                 booked_items.append(item)
-        print('Please release your booked item by id:')
+        print('\nPlease release your booked item by id:')
         for item in booked_items:
             print(f"- {item['kind']} #{item['id']}, is booked now: {item['is_booked']}.")
         usr_choice = input('Your choice (#): ')
@@ -59,7 +59,7 @@ class ReservationSystem:
             print(f"- {item['kind']} #{item['id']}, is booked now: {item['is_booked']}.")
 
 
-hotel = ReservationSystem('Dream')
+hotel = ReservationSystem('SweetDream')
 hotel.create_booking_item('1', 'room')
 hotel.create_booking_item('2', 'room')
 hotel.create_booking_item('3', 'table')
@@ -68,3 +68,5 @@ hotel.book_item()
 hotel.book_item()
 hotel.get_items_by_state('free')
 hotel.get_items_by_state('booked')
+hotel.release_item()
+hotel.get_all()
