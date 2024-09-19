@@ -1,73 +1,91 @@
-import numpy as np
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.datasets import fetch_california_housing
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_diabetes
 
-# Download some data
-california = fetch_california_housing()
-print(california.data.shape)  # Features (rows, columns)
-print(california.feature_names)  # List of feature names
-print(california.target.shape)  # Target (housing prices)
+from src.utils import plot_dataset
 
-# Convert to DataFrame
-california_df = pd.DataFrame(data=california.data, columns=california.feature_names)
-california_df['Target'] = california.target  # Adding the target column for housing prices
+diabetes = load_diabetes()
+print(diabetes.data.shape)
+print(diabetes.feature_names)
+print(diabetes.target.shape)
 
-# Display the first few rows of the DataFrame
-print(california_df.head())
+# # Convert to DataFrame
+# diabetes_df = pd.DataFrame(data=diabetes.data, columns=diabetes.feature_names)
+# diabetes_df['Target'] = diabetes.target  # Adding the target column for housing prices
+#
+# # Display the first few rows of the DataFrame
+# print(diabetes_df.head())
+#
+# # Plot the data Pair Plot
+# sns.set_theme(style="ticks", font_scale=0.9)
+# sns.pairplot(diabetes_df, hue="age", height=1.2)
 
-# Plot the data Pair Plot
-sns.set_theme(style="ticks", font_scale=0.9)
-sns.pairplot(california_df, hue="HouseAge", height=1.2)
+# Select the first feature for X and the target for y
+X = diabetes.data  # Selecting the 'age' feature [:, 0:1]
+y = diabetes.target  # Diabetes cases
+print("X", X[:5])
+print("Y", y[:5])
 
-# Prepare full feature set and target
-X_full = california.data
-y = california.target
+# Plot the generated data
+# plot_dataset(X, y)
 
-# Split the full dataset into train and test
-X_train_full, X_test_full, y_train, y_test = train_test_split(X_full, y, test_size=0.2, random_state=42)
+# Split dataset to train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Store R-squared values for each feature removal case
-feature_names = california.feature_names
-r_squared_values = []
+# Scale data
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-# Iterate over features, removing one at a time
-for i in range(X_full.shape[1]):
-    X_train_reduced = np.delete(X_train_full, i, axis=1)
-    X_test_reduced = np.delete(X_test_full, i, axis=1)
+# Training The Model using Scikit Learn
+model = LinearRegression()
+model.fit(X_train, y_train)
+model_sc = LinearRegression()
+model_sc.fit(X_train_scaled, y_train)
 
-    # Train the model on the reduced feature set
-    model = LinearRegression()
-    model.fit(X_train_reduced, y_train)
+# Extracting model parameters
+beta_1 = model.coef_[0]
+beta_0 = model.intercept_
 
-    # Predicting with the model
-    Y_predict = model.predict(X_test_reduced)
+# Extracting model parameters for scaled data
+beta_1_sc = model_sc.coef_[0]
+beta_0_sc = model_sc.intercept_
 
-    # Calculate R-squared value
-    r_squared = model.score(X_test_reduced, y_test)
-    r_squared_values.append((feature_names[i], r_squared))
+# Predicting with the model
+Y_predict = model.predict(X_test)
+Y_predict_sc = model.predict(X_test_scaled)
 
-    # Output the results for each feature removed
-    print(f"R-squared after removing {feature_names[i]}: {r_squared:.4f}")
+# R-squared value - Mean Squared Error
+r_squared = model.score(X_test, y_test)
+r_squared_sc = model.score(X_test_scaled, y_test)
 
-    # Plot the actual vs predicted housing prices
-    plt.figure(figsize=(6, 4))
-    plt.scatter(y_test, Y_predict, color='blue', label='Predictions vs Actual')
-    plt.plot([min(y_test), max(y_test)], [min(Y_predict), max(Y_predict)], color='red', linewidth=2, label='Ideal Line')
-    plt.xlabel('Actual Housing Prices')
-    plt.ylabel('Predicted Housing Prices')
-    plt.title(f'Actual vs Predicted: Removed {feature_names[i]}')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+# Output the results
+print(f"beta_1 (slope): {beta_1}, scaled: {beta_1_sc}")
+print(f"beta_0 (intercept): {beta_0}, scaled: {beta_0_sc}")
+print(f"R-squared: {r_squared:.4f}, scaled: {r_squared_sc:.4f}")
+print(len(X_test))
+print(len(y_test))
+# Plot the original data points and the regression line
+plt.scatter(X_test, y_test, color='blue', label='Data points')
+plt.plot(X_test, Y_predict, color='red', linewidth=2, label=f'Regression line: Y = {beta_0:.2f} + {beta_1:.2f}X')
+plt.xlabel('Age')
+plt.ylabel('Diabetes Cases')
+plt.title('Simple Linear Regression on Diabetes Data')
+plt.legend()
+plt.grid(True)
+plt.show()
 
-# Sort the R-squared values for better understanding of the feature importance
-r_squared_values_sorted = sorted(r_squared_values, key=lambda x: x[1], reverse=True)
-
-# Display the sorted results
-print("R-squared values after removing each feature:")
-for feature, r_sq in r_squared_values_sorted:
-    print(f"{feature}: {r_sq:.4f}")
+# # Plot the scaled data points and the regression line
+# plt.scatter(X_test_scaled, y_test, color='blue', label='Data points')
+# plt.plot(X_test_scaled, Y_predict_sc, color='red', linewidth=2,
+#          label=f'Regression line: Y = {beta_0_sc:.2f} + {beta_1_sc:.2f}X')
+# plt.xlabel('Age')
+# plt.ylabel('Diabetes Cases')
+# plt.title('Simple Linear Regression on Scaled Diabetes Data')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
